@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Application Submitted";
+}
+
+@model Mission06_emwind.Models.ApplicationResponse
+
+@if (Model.CreeperStalker == true)
+{
+    <h2>No thank you.</h2>
+}
+else
+{
+    <h2>Application recieved. Thank you, @Model.FirstName!</h2>
+}
+
