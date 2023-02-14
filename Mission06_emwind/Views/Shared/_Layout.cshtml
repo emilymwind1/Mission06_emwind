@@ -13,15 +13,15 @@
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">My Podcasts</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Podcast">My Podcasts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Movie Submission</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MovieSubmission" >Movie Submission</a>
                     </li>
                 </ul>
         </nav>
     </header>
-    <div>
+    <div style="padding:25px;">
         @RenderBody()
     </div>
 </body>

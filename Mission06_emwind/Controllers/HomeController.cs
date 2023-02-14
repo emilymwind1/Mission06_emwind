@@ -24,18 +24,18 @@ namespace Mission06_emwind.Controllers
         }
 
         [HttpGet]
-        public IActionResult DatingApplication() 
+        public IActionResult MovieSubmission() 
         {
             return View();
          }
 
         [HttpPost]
-        public IActionResult DatingApplication(ApplicationResponse ar)
+        public IActionResult MovieSubmission(ApplicationResponse ar)
         {
             return View("Confirmation", ar);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Podcast()
         {
             return View();
         }
