@@ -8,6 +8,10 @@ namespace Mission06_emwind.Models
 {
     public class ApplicationResponse
     {
+        [Key]
+        [Required]
+        public int MovieID { get; set; }
+
         [Required(ErrorMessage = "Category is required")]
         public string Category { get; set; }
 

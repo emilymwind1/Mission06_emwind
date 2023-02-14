@@ -12,10 +12,12 @@ namespace Mission06_emwind.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private MovieContext blahContext { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, MovieContext someName)
         {
             _logger = logger;
+            blahContext = someName;
         }
 
         public IActionResult Index()
@@ -32,6 +34,8 @@ namespace Mission06_emwind.Controllers
         [HttpPost]
         public IActionResult MovieSubmission(ApplicationResponse ar)
         {
+            blahContext.Add(ar);
+            blahContext.SaveChanges();
             return View("Confirmation", ar);
         }
 
