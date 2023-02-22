@@ -44,6 +44,8 @@ namespace Mission06_emwind.Controllers
             }
             else
             {
+                ViewBag.Categories = DbContext.Categories.ToList();
+
                 return View(ar);
             }
         }
@@ -84,9 +86,20 @@ namespace Mission06_emwind.Controllers
                 return RedirectToAction("MovieList");
         }
 
-        public IActionResult Delete()
+        [HttpGet]
+        public IActionResult Delete(int movid)
         {
-            return View();
+            var submission = DbContext.responses.Single(x => x.MovieID == movid);
+            return View(submission);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(ApplicationResponse ar)
+        {
+            DbContext.responses.Remove(ar);
+            DbContext.SaveChanges();
+
+            return RedirectToAction("MovieList");
         }
     }
 }
