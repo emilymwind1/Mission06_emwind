@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission06_emwind.Models;
 using System;
@@ -27,6 +28,8 @@ namespace Mission06_emwind.Controllers
         [HttpGet]
         public IActionResult MovieSubmission() 
         {
+            ViewBag.Categories = DbContext.Categories.ToList();
+
             return View();
          }
 
@@ -48,6 +51,7 @@ namespace Mission06_emwind.Controllers
         public IActionResult MovieList()
         {
             var movies = DbContext.responses
+                .Include(x => x.Category)
                 .OrderBy(x => x.Category)
                 .ToList();
 

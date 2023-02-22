@@ -12,9 +12,6 @@ namespace Mission06_emwind.Models
         [Required]
         public int MovieID { get; set; }
 
-        [Required(ErrorMessage = "Category is required")]
-        public string Category { get; set; }
-
         [Required(ErrorMessage = "Title is required")]
         public string Title { get; set; }
 
@@ -32,5 +29,12 @@ namespace Mission06_emwind.Models
 
         [StringLength(25, ErrorMessage ="Notes must be 25 characters or less")]
         public string Notes{ get; set; }
+
+        // Build Foreign Key Relationship
+        [Required(ErrorMessage = "Category is required")]
+        public int CategoryID { get; set; }
+        public Category Category { get; set; }
+
+
     }
 }

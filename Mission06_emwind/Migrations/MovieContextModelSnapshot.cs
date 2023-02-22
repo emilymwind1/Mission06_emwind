@@ -21,9 +21,8 @@ namespace Mission06_emwind.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -52,13 +51,15 @@ namespace Mission06_emwind.Migrations
 
                     b.HasKey("MovieID");
 
+                    b.HasIndex("CategoryID");
+
                     b.ToTable("responses");
 
                     b.HasData(
                         new
                         {
                             MovieID = 1,
-                            Category = "Drama",
+                            CategoryID = 3,
                             Director = "Cameron Crowe",
                             Edited = false,
                             Rating = "PG",
@@ -68,7 +69,7 @@ namespace Mission06_emwind.Migrations
                         new
                         {
                             MovieID = 2,
-                            Category = "Romance",
+                            CategoryID = 4,
                             Director = "George Tillman Jr",
                             Edited = false,
                             Rating = "PG-13",
@@ -78,13 +79,83 @@ namespace Mission06_emwind.Migrations
                         new
                         {
                             MovieID = 3,
-                            Category = "Romance/Drama",
+                            CategoryID = 4,
                             Director = "Joe Wright",
                             Edited = false,
                             Rating = "PG",
                             Title = "Pride and Prejudice",
                             Year = 2005
                         });
+                });
+
+            modelBuilder.Entity("Mission06_emwind.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryID = 1,
+                            CategoryName = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryID = 2,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryID = 3,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryID = 4,
+                            CategoryName = "Romance"
+                        },
+                        new
+                        {
+                            CategoryID = 5,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryID = 6,
+                            CategoryName = "Horror/Suspense"
+                        },
+                        new
+                        {
+                            CategoryID = 7,
+                            CategoryName = "Miscellaneous"
+                        },
+                        new
+                        {
+                            CategoryID = 8,
+                            CategoryName = "Television"
+                        },
+                        new
+                        {
+                            CategoryID = 9,
+                            CategoryName = "VHS"
+                        });
+                });
+
+            modelBuilder.Entity("Mission06_emwind.Models.ApplicationResponse", b =>
+                {
+                    b.HasOne("Mission06_emwind.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
