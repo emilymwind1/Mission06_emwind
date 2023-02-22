@@ -11,15 +11,14 @@ namespace Mission06_emwind.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private MovieContext blahContext { get; set; }
+        private MovieContext DbContext { get; set; }
 
-        public HomeController(ILogger<HomeController> logger, MovieContext someName)
+        public HomeController(MovieContext someName)
         {
-            _logger = logger;
-            blahContext = someName;
+            DbContext = someName;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -34,20 +33,25 @@ namespace Mission06_emwind.Controllers
         [HttpPost]
         public IActionResult MovieSubmission(ApplicationResponse ar)
         {
-            blahContext.Add(ar);
-            blahContext.SaveChanges();
+            DbContext.Add(ar);
+            DbContext.SaveChanges();
             return View("Confirmation", ar);
         }
 
+        [HttpGet]
         public IActionResult Podcast()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpGet]
+        public IActionResult MovieList()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var movies = DbContext.responses
+                .OrderBy(x => x.Category)
+                .ToList();
+
+            return View(movies);
         }
     }
 }
