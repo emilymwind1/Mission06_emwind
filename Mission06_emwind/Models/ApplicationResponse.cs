@@ -23,7 +23,6 @@ namespace Mission06_emwind.Models
 
         [Required(ErrorMessage = "Rating is required")]
         public string Rating { get; set; }
-
         public bool Edited { get; set; }
         public string LentTo { get; set; }
 

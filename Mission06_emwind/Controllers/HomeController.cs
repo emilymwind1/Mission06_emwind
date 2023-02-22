@@ -36,9 +36,16 @@ namespace Mission06_emwind.Controllers
         [HttpPost]
         public IActionResult MovieSubmission(ApplicationResponse ar)
         {
-            DbContext.Add(ar);
-            DbContext.SaveChanges();
-            return View("Confirmation", ar);
+            if (ModelState.IsValid)
+            {
+                DbContext.Add(ar);
+                DbContext.SaveChanges();
+                return View("Confirmation", ar);
+            }
+            else
+            {
+                return View(ar);
+            }
         }
 
         [HttpGet]
@@ -56,6 +63,30 @@ namespace Mission06_emwind.Controllers
                 .ToList();
 
             return View(movies);
+        }
+
+        [HttpGet]
+        public IActionResult Edit (int movid)
+        {
+            ViewBag.Categories = DbContext.Categories.ToList();
+
+            var submission = DbContext.responses.Single(x => x.MovieID == movid);
+
+            return View("MovieSubmission", submission);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ApplicationResponse appres)
+        {
+                DbContext.Update(appres);
+                DbContext.SaveChanges();
+
+                return RedirectToAction("MovieList");
+        }
+
+        public IActionResult Delete()
+        {
+            return View();
         }
     }
 }

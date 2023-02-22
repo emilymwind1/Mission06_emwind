@@ -8,6 +8,7 @@
 
 <div>
     <form method="post">
+        <div asp-validation-summary="All"></div>
         <label asp-for="CategoryID">Category:</label>
         <select asp-for="CategoryID">
             <option value="">Select a Category</option>
@@ -28,11 +29,11 @@
 
         <label asp-for="Rating">Rating:</label>
         <select asp-for="Rating">
-            <option value="UR">UR</option>
             <option value="G">G</option>
             <option value="PG">PG</option>
             <option value="PG-13">PG-13</option>
             <option value="R">R</option>
+            <option value="UR">UR</option>
         </select><br />
 
 
